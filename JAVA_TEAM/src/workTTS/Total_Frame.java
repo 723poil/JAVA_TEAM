@@ -1,6 +1,6 @@
+package workTTS;
 
 
-import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Total_Frame extends JFrame {
 	
@@ -22,22 +21,23 @@ public class Total_Frame extends JFrame {
 
 	public static void main(String[] args) {
 		
-		JFrame totalFrame = new JFrame("Panel Test");
-		Panel_1 Panel1 = new Panel_1();
-		JPanel subpanel = new JPanel();
+		JFrame totalFrame = new JFrame("Working TTS"); // Frame 생성
 		
-		Dimension panelDm = new Dimension(300, 740);
+		Panel_1 panel1 = new Panel_1(); // 리스트 패널 생성
+		Panel_2 panel2 = new Panel_2(); // 버튼 패널 생성
+		Panel_3 panel3 = new Panel_3(); // 텍스트필드 패널 생성
 		
-		Panel1.setPreferredSize(panelDm);
-		Panel1.setBounds(5, 0, 320, 740);
-		totalFrame.add(Panel1);
+		totalFrame.setBounds(100, 100, 500, 650);
 		
-		subpanel.setBounds(510, 0, 150, 740);
-		totalFrame.add(subpanel);
+		panel1.setBounds(5, 0, 300, 400);		
+		panel2.setBounds(305, 0, 195, 400);			
+		panel3.setBounds(5, 405, 490, 250);
 		
+		totalFrame.add(panel1);
+		totalFrame.add(panel2);
+		totalFrame.add(panel3);
 		
 		totalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // frame 창 실행
-		totalFrame.setSize(500, 650);
 		totalFrame.setVisible(true);
 		totalFrame.setLocationRelativeTo(null);
 		totalFrame.setResizable(false);		
@@ -48,7 +48,9 @@ public class Total_Frame extends JFrame {
 			public void windowOpened(WindowEvent e) { // 창이 실행 될 경우
 				directoryPath = getDirectoryPath();   // 디렉토리 경로를 구하는 함수
 				try {
-					Panel_1.UpdateTextList(Panel1);   // 리스트 업데이트 함수
+					if(!directoryPath.toString().equals("")) {
+						Panel_1.UpdateTextList(panel1);   // 리스트 업데이트 함수
+					}
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -56,10 +58,11 @@ public class Total_Frame extends JFrame {
 		});
 	}
 	
-	public static Path getDirectoryPath() {           // 디렉토리 경로 구하는 함수
-		JFileChooser fileChooser = new JFileChooser();          // FileChooser 선언
+	public static Path getDirectoryPath() {                               // 디렉토리 경로 구하는 함수
+		JFileChooser fileChooser = new JFileChooser();                    // FileChooser 선언
 		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);  // 디렉토리만 선택할 수 있도록 설정
-		fileChooser.showOpenDialog(fileChooser);                          // 대화창 열기
+		int result = fileChooser.showOpenDialog(fileChooser);             // 대화창 열기
+		if(result == JFileChooser.CANCEL_OPTION) return Paths.get("");    // 취소 클릭 시 빈 경로 반환
 		
 		return fileChooser.getSelectedFile().toPath();                    // 경로값 리턴
 	}

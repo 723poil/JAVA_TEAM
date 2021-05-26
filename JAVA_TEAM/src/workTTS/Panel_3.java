@@ -1,3 +1,4 @@
+package workTTS;
 
 
 import java.awt.event.ActionEvent;
@@ -20,11 +21,11 @@ public class Panel_3 extends JPanel {
 		setLayout(null);
 		
 		textField = new JTextField(70);
-		textField.setBounds(0, 0, 410, 40);
+		textField.setBounds(5, 405, 400, 60);
 		add(textField);
 		
 		buttonText = new JButton("¿˙¿Â");
-		buttonText.setBounds(415, 0, 60, 40);
+		buttonText.setBounds(415, 405, 60, 60);
 		add(buttonText);
 		
 		Handler handler = new Handler();
