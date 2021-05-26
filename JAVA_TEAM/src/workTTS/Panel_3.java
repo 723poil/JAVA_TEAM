@@ -21,11 +21,11 @@ public class Panel_3 extends JPanel {
 		setLayout(null);
 		
 		textField = new JTextField(70);
-		textField.setBounds(5, 405, 400, 60);
+		textField.setBounds(8, 405, 400, 60);
 		add(textField);
 		
 		buttonText = new JButton("¿˙¿Â");
-		buttonText.setBounds(415, 405, 60, 60);
+		buttonText.setBounds(418, 405, 60, 60);
 		add(buttonText);
 		
 		Handler handler = new Handler();
