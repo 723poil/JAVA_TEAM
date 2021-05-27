@@ -60,12 +60,12 @@ public class Panel_1 extends JPanel {
 				if(fileExtension.equals("txt")) {          // 파일 확장자가 txt일 경우 텍스트내용을 가져옴
 					builder = SetBuilder(p);               // SetBuilder method로 builder 생성
 					
-					if(builder.toString().equals("")) break;   // 텍스트 파일의 내용이 없을 경우 갱신하지 않음
-					storedTTS[++count] = builder.toString();   // storedTTS 객체에 저장
+					if(builder.toString().equals("")) break;  // 텍스트 파일의 내용이 없을 경우 갱신하지 않음
+					storedTTS[++count] = builder.toString();  // storedTTS 객체에 저장
 				}				
 			}
 		}
-		panel.textToSpeechList.updateUI();                 // List 업데이트해서 내용 갱신
+		panel.textToSpeechList.updateUI();                    // List 업데이트해서 내용 갱신
 	}
 	
 	public static StringBuilder SetBuilder(Path path) throws IOException {  // 텍스트 내용이 있는 builder 생성

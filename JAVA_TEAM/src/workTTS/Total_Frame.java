@@ -1,8 +1,6 @@
 package workTTS;
 
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -27,13 +25,11 @@ public class Total_Frame extends JFrame {
 	public static void main(String[] args) {
 		
 		JFrame totalFrame = new JFrame("Working TTS"); // Frame »ý¼º
-		
-		
-		
+			
 		totalFrame.setBounds(100, 100, 500, 650);
 		
 		panel1.setBounds(5, 0, 300, 400);		
-		panel2.setBounds(305, 0, 195, 400);			
+		panel2.setBounds(305, 0, 195, 400);		
 		panel3.setBounds(5, 405, 490, 250);
 		
 		totalFrame.add(panel1);
