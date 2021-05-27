@@ -1,6 +1,8 @@
 package workTTS;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -12,6 +14,9 @@ import javax.swing.JFrame;
 
 public class Total_Frame extends JFrame {
 	
+	static Panel_1 panel1 = new Panel_1(); // 리스트 패널 생성
+	static Panel_2 panel2 = new Panel_2(panel1); // 버튼 패널 생성
+	static Panel_3 panel3 = new Panel_3(); // 텍스트필드 패널 생성
 	/**
 	 * 
 	 */
@@ -23,9 +28,7 @@ public class Total_Frame extends JFrame {
 		
 		JFrame totalFrame = new JFrame("Working TTS"); // Frame 생성
 		
-		Panel_1 panel1 = new Panel_1(); // 리스트 패널 생성
-		Panel_2 panel2 = new Panel_2(); // 버튼 패널 생성
-		Panel_3 panel3 = new Panel_3(); // 텍스트필드 패널 생성
+		
 		
 		totalFrame.setBounds(100, 100, 500, 650);
 		
@@ -66,5 +69,4 @@ public class Total_Frame extends JFrame {
 		
 		return fileChooser.getSelectedFile().toPath();                    // 경로값 리턴
 	}
-
 }

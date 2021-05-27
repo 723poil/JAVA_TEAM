@@ -45,6 +45,7 @@ public class Panel_1 extends JPanel {
 		
 	public static void UpdateTextList(Panel_1 panel) throws IOException {
 		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Total_Frame.directoryPath);
+		count = -1; // count 값을 초기화 해주지 않으면 원래 있던 리스트에서 덧붙혀 나옴!
 		
 		for(Path p : directoryStream) {
 			if(!Files.isDirectory(p)) {
@@ -59,7 +60,7 @@ public class Panel_1 extends JPanel {
 	
 	public static StringBuilder SetBuilder(Path path) throws IOException {  // 텍스트 내용이 있는 builder 생성
 		StringBuilder builder = new StringBuilder();          // 텍스트 내용을 저장할 builder
-		
+
 		FileInputStream fileStream = null;
 		fileStream = new FileInputStream(path.toString());    // p경로의 fileStream (FileInputStream) 생성
 		
