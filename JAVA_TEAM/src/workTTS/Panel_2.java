@@ -13,7 +13,7 @@ public class Panel_2 extends JPanel {
 	private final JButton resetPath; // 경로 재설정해주는 버튼
 	private final JButton button2;
 	private final JButton button3;
-	private final JButton button4;
+	private final JButton defaultList;
 	private final JButton button5;
 	private final Panel_1 panel1;
 	
@@ -23,27 +23,27 @@ public class Panel_2 extends JPanel {
 		resetPath = new JButton("경로 재설정");  // 경로 재설정 버튼
 		button2 = new JButton();
 		button3 = new JButton();
-		button4 = new JButton();
+		defaultList = new JButton("리스트 초기화");
 		button5 = new JButton();
 		this.panel1 = panel1;        // 패널1 선언
 		
 		resetPath.setBounds(15,25,150,50);
 		button2.setBounds(15,100,150,50);
 		button3.setBounds(15,175,150,50);
-		button4.setBounds(15,250,150,50);	
+		defaultList.setBounds(15,250,150,50);	
 		button5.setBounds(15,325,150,50);
 		
 		add(resetPath);
 		add(button2);
 		add(button3);
-		add(button4);
+		add(defaultList);
 		add(button5);
 		
 		EventHandler handler = new EventHandler();
 		resetPath.addActionListener(handler);
 		button2.addActionListener(handler);
 		button3.addActionListener(handler);
-		button4.addActionListener(handler);
+		defaultList.addActionListener(handler);
 		button5.addActionListener(handler);
 	}
 	
@@ -61,6 +61,15 @@ public class Panel_2 extends JPanel {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
+			}
+			else if(event.getSource() == defaultList) { // GUI상의 내용만 지우는 것 말고 텍스트 파일과 mp3파일을 같이 지워줘야 함!
+				for(int i=0; i<=Panel_1.count ; i++) {  // 리스트 업데이트 전 내용 초기화
+					Panel_1.storedTTS[i] = "";
+				}
+				Panel_1.count = -1;
+				
+				panel1.updateUI();
+				// 텍스트파일과 mp3파일 지우는 함수 생성
 			}
 		}
 	}
