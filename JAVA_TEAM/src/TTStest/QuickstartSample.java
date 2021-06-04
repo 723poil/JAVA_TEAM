@@ -10,13 +10,8 @@ import com.google.protobuf.ByteString;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 
-/**
- * Google Cloud TextToSpeech API sample application. Example usage: mvn package exec:java
- * -Dexec.mainClass='com.example.texttospeech.QuickstartSample'
- */
 public class QuickstartSample {
 
-  /** Demonstrates using the Text-to-Speech API. */
   public static void main(String... args) throws Exception {
     // Instantiates a client
     TextToSpeechClient textToSpeechClient = TextToSpeechClient.create();
