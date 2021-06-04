@@ -1,6 +1,5 @@
 package workTTS;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -44,7 +43,7 @@ public class Panel_1 extends JPanel {
 						}});
 		}
 		
-	public static void UpdateTextList(Panel_1 panel) throws IOException {
+	public static void UpdateTextList(Panel_1 panel, Panel_3 panel3) throws IOException {
 		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Total_Frame.directoryPath);
 		
 		for(int i=0; i<=count ; i++) {  // 리스트 업데이트 전 내용 초기화
@@ -73,7 +72,11 @@ public class Panel_1 extends JPanel {
 			}
 		}
 		
-		panel.textToSpeechList.updateUI();                    // List 업데이트해서 내용 갱신
+		panel.textToSpeechList.updateUI(); // List 업데이트해서 내용 갱신
+		int listcount = count+1;
+		panel3.listCount.setText("리스트 수 "+listcount+" / 30");
+		panel3.listCount.updateUI();	
+		
 	}
 	
 	public static StringBuilder SetBuilder(Path path) throws IOException {  // 텍스트 내용이 있는 builder 생성

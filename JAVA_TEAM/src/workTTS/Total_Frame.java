@@ -13,8 +13,9 @@ import javax.swing.JFrame;
 public class Total_Frame extends JFrame {
 	
 	static Panel_1 panel1 = new Panel_1(); // 리스트 패널 생성
-	static Panel_2 panel2 = new Panel_2(panel1); // 버튼 패널 생성
 	static Panel_3 panel3 = new Panel_3(); // 텍스트필드 패널 생성
+	static Panel_2 panel2 = new Panel_2(panel1, panel3); // 버튼 패널 생성
+	
 	/**
 	 * 
 	 */
@@ -48,7 +49,7 @@ public class Total_Frame extends JFrame {
 				directoryPath = getDirectoryPath();   // 디렉토리 경로를 구하는 함수
 				try {
 					if(!directoryPath.toString().equals("")) {
-						Panel_1.UpdateTextList(panel1);   // 리스트 업데이트 함수
+						Panel_1.UpdateTextList(panel1, panel3);   // 리스트 업데이트 함수
 					}
 				} catch (IOException e1) {
 					e1.printStackTrace();

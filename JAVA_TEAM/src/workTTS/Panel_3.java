@@ -19,7 +19,7 @@ public class Panel_3 extends JPanel {
 	// panel3 컴포넌트
 	private final JTextField textField;       // 텍스트를 입력할 공간
 	private final JButton buttonText;         // 텍스트를 입력하고 텍스트 파일에 저장할 때 사용
-	private final JLabel listCount; 
+	public JLabel listCount; 
 	private final JButton stopButton;
 	private final JButton pauseButton;
 	private final JButton playButton;

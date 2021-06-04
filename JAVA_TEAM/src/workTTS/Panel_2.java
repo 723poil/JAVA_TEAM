@@ -16,16 +16,18 @@ public class Panel_2 extends JPanel {
 	private final JButton defaultList;
 	private final JButton button5;
 	private final Panel_1 panel1;
+	private final Panel_3 panel3;
 	
-	public Panel_2(Panel_1 panel1) { // 패널1을 가져와서 리스트 설정할때 도움을 줌
+	public Panel_2(Panel_1 panel1, Panel_3 panel3) { // 패널1을 가져와서 리스트 설정할때 도움을 줌
 		setLayout(null);
 		
-		resetPath = new JButton("경로 재설정");  // 경로 재설정 버튼
+		resetPath = new JButton("경로 재설정");    // 경로 재설정 버튼
 		button2 = new JButton("리스트 전체 삭제");  // 버튼 클릭 시 재확인 창이 뜨면 좋겠음 
-		button3 = new JButton("리스트 삭제"); // 1개씩 위에서 부터 삭제 되도록 (mp3파일도 같이 삭제 되어야함)
+		button3 = new JButton("리스트 삭제");      // 1개씩 위에서 부터 삭제 되도록 (mp3파일도 같이 삭제 되어야함)
 		defaultList = new JButton("리스트 초기화");
 		button5 = new JButton();
-		this.panel1 = panel1;        // 패널1 선언
+		this.panel1 = panel1;                   // 패널1 선언
+		this.panel3 = panel3;
 		
 		resetPath.setBounds(15,25,150,50);
 		button2.setBounds(15,100,150,50);
@@ -56,7 +58,7 @@ public class Panel_2 extends JPanel {
 				Total_Frame.directoryPath = Total_Frame.getDirectoryPath();   // Total_Frame의 변수와 method를 가져옴
 				try {
 					if(!Total_Frame.directoryPath.toString().equals("")) {
-						Panel_1.UpdateTextList(panel1);   // 리스트 업데이트 함수
+						Panel_1.UpdateTextList(panel1, panel3);   // 리스트 업데이트 함수
 					}                                     // 여기있는 panel1이 생성자로 가져온 변수
 				} catch (IOException e1) {
 					e1.printStackTrace();
