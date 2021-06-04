@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -53,10 +52,15 @@ public class Panel_1 extends JPanel {
 		}
 		count = -1;  // count 값을 초기화 해주지 않으면 원래 있던 리스트에서 덧붙혀 나옴!
 		
+		File folder = new File(Total_Frame.directoryPath+"\\TTS");
+		if (!folder.exists()) {
+			FileManager.createFolder(folder);
+		}
+		
 		for(Path p : directoryStream) {
 			
 			if(!Files.isDirectory(p)) {
-				String fileExtension = getFileExtension(p);// 파일 확장자 가져오는 함수
+				String fileExtension = FileManager.getFileExtension(p);// 파일 확장자 가져오는 함수
 				StringBuilder builder = null;
 				if(fileExtension.equals("txt")) {          // 파일 확장자가 txt일 경우 텍스트내용을 가져옴
 					builder = SetBuilder(p);               // SetBuilder method로 builder 생성
@@ -64,14 +68,9 @@ public class Panel_1 extends JPanel {
 					if(builder.toString().equals("")) break;  // 텍스트 파일의 내용이 없을 경우 갱신하지 않음
 					storedTTS[++count] = builder.toString();  // storedTTS 객체에 저장
 					
-					checkFile(count);
+					FileManager.checkFile(count);
 				}				
 			}
-		}
-
-		File folder = new File(Total_Frame.directoryPath+"\\TTS");
-		if (!folder.exists()) {
-			createFolder(folder);
 		}
 		
 		panel.textToSpeechList.updateUI();                    // List 업데이트해서 내용 갱신
@@ -92,29 +91,5 @@ public class Panel_1 extends JPanel {
 		
 		return builder;
 	}
-	
-	public static String getFileExtension(Path p) {           // 파일 확장자 가져오기
-		File file = new File(p.toString());                   // 파일 생성
-		String filename = file.getName();                     // 파일의 이름을 가져오기
-		String fileExtension = "";                            // 확장자를 저장할 객체
-		
-		int i = filename.lastIndexOf('.');                    // . 부분의 인덱스 저장하는 변수
-		if(i>0) fileExtension = filename.substring(i+1);      // . 다음부분들을 저장해줌
-		
-		return fileExtension;                                 // 확장자명 리턴
-	}
-	
-	public static void createFolder(File folder) {            // 폴더 생성 메소드
-		
-		folder.mkdir();
-		JOptionPane.showMessageDialog(null, "TTS폴더가 생성되었습니다.");
-	}
-	
-	public static void checkFile(int index) throws IOException {         // mp3파일이 이미 생성되어있는지 확인하는 메소드
-		File file = new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3");
-		
-		if(!file.exists()) {
-			SetFileTTS.create(Panel_1.storedTTS[index], index);
-		}
-	}
+
 }
