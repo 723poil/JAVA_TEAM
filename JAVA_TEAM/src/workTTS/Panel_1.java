@@ -104,13 +104,13 @@ public class Panel_1 extends JPanel {
 		return fileExtension;                                 // 확장자명 리턴
 	}
 	
-	public static void createFolder(File folder) {
+	public static void createFolder(File folder) {            // 폴더 생성 메소드
 		
 		folder.mkdir();
 		JOptionPane.showMessageDialog(null, "TTS폴더가 생성되었습니다.");
 	}
 	
-	public static void checkFile(int index) throws IOException {
+	public static void checkFile(int index) throws IOException {         // mp3파일이 이미 생성되어있는지 확인하는 메소드
 		File file = new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3");
 		
 		if(!file.exists()) {

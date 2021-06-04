@@ -21,8 +21,8 @@ public class Panel_2 extends JPanel {
 		setLayout(null);
 		
 		resetPath = new JButton("경로 재설정");  // 경로 재설정 버튼
-		button2 = new JButton();
-		button3 = new JButton();
+		button2 = new JButton("리스트 전체 삭제");  // 버튼 클릭 시 재확인 창이 뜨면 좋겠음 
+		button3 = new JButton("리스트 삭제"); // 1개씩 위에서 부터 삭제 되도록 (mp3파일도 같이 삭제 되어야함)
 		defaultList = new JButton("리스트 초기화");
 		button5 = new JButton();
 		this.panel1 = panel1;        // 패널1 선언
