@@ -7,6 +7,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -38,12 +39,16 @@ public class Panel_1 extends JPanel {
 
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							// 음성 재생 method 기입
+							if(e.getSource() == textToSpeechList) {
+								if(textToSpeechList.getSelectedIndex() <= count) {
+									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"), Total_Frame.panel1);
+								}
+							}
 							
 						}});
 		}
 		
-	public static void UpdateTextList(Panel_1 panel, Panel_3 panel3) throws IOException {
+	public static void UpdateTextList(Panel_1 panel, Panel_3 panel3) throws IOException, UnsupportedAudioFileException {
 		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Total_Frame.directoryPath);
 		
 		for(int i=0; i<=count ; i++) {  // 리스트 업데이트 전 내용 초기화
@@ -74,7 +79,7 @@ public class Panel_1 extends JPanel {
 		
 		panel.textToSpeechList.updateUI(); // List 업데이트해서 내용 갱신
 		int listcount = count+1;
-		panel3.listCount.setText("리스트 수 "+listcount+" / 30");
+		panel3.listCount.setText("리스트 수 "+listcount+" / 30"); // 리스트 수 나타내는 라벨 업데이트
 		panel3.listCount.updateUI();	
 		
 	}

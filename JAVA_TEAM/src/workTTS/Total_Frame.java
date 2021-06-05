@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -52,6 +53,9 @@ public class Total_Frame extends JFrame {
 						Panel_1.UpdateTextList(panel1, panel3);   // 리스트 업데이트 함수
 					}
 				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

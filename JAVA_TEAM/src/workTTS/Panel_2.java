@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -62,6 +63,9 @@ public class Panel_2 extends JPanel {
 					}                                     // 여기있는 panel1이 생성자로 가져온 변수
 				} catch (IOException e1) {
 					e1.printStackTrace();
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			else if(event.getSource() == defaultList) { // GUI상의 내용만 지우는 것 말고 텍스트 파일과 mp3파일을 같이 지워줘야 함!
