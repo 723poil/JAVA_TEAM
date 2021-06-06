@@ -1,7 +1,7 @@
 package workTTS;
 
 
-import java.awt.Color;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -11,9 +11,9 @@ import java.nio.file.Paths;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
-public class Total_Frame extends JFrame {
+
+public class Total_Frame extends JFrame { //
 	
 	static Panel_1 panel1 = new Panel_1(); // 리스트 패널 생성
 	static Panel_3 panel3 = new Panel_3(); // 텍스트필드 패널 생성

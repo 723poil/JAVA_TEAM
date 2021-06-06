@@ -32,7 +32,7 @@ public class Panel_3 extends JPanel {
 	private final JLabel mainImage;
 	
 	public Panel_3() {
-		setLayout(null);
+		setLayout(null); //
 		
 		listCount = new JLabel("리스트 수");          // 리스트에 있는 텍스트의 수 표시
 		stopButton = new JButton();        // 음성 정지 버튼
