@@ -23,6 +23,7 @@ public class Panel_1 extends JPanel {
 		private final JList<String> textToSpeechList;
 		public static String[] storedTTS = new String[30];    // 최대 30개로 설정
 		public static int count = -1;                         // 저장된 텍스트의 수
+		public boolean valueCount = false;
 		
 		public Panel_1() {
 			textToSpeechList = new JList<String>(storedTTS);  // 저장된 텍스트를 List에 삽입
@@ -39,10 +40,12 @@ public class Panel_1 extends JPanel {
 
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if(e.getSource() == textToSpeechList) {
+							if(e.getSource() == textToSpeechList && !valueCount) {
 								if(textToSpeechList.getSelectedIndex() <= count) {
+									valueCount = true;
 									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"), Total_Frame.panel1);
 								}
+								valueCount = false;
 							}
 							
 						}});

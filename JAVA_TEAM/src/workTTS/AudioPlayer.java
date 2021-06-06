@@ -3,19 +3,17 @@ package workTTS;
 import java.io.File;
 import java.nio.file.Path;
 
-import javax.swing.JOptionPane;
-
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class AudioPlayer {
 
-	private static boolean endOfMedia;
 	public static long totalTime;
 	private static long currentTime;
 	
 	public static void playAudio(File audio, Panel_1 panel1) {
+		@SuppressWarnings("unused")
 		JFXPanel panel = new JFXPanel();
 		Path p = audio.toPath();
 		Media m = new Media(p.toUri().toString());
@@ -37,8 +35,6 @@ public class AudioPlayer {
             pa.stop();
         });
         th.start();
-	        
-		
 
 		panel1.updateUI();
 	}
