@@ -26,7 +26,8 @@ public class AudioPlayer {
 		
 
 		Thread th = new Thread(()-> {
-			
+			Total_Frame.panel3.playButton.setSelected(true);
+			Total_Frame.panel3.playButton.setIcon(Total_Frame.panel3.clickedplay);
             while(currentTime < totalTime) { // 재생시간에 따라 스레드 종료
             	if(currentTime > 100 && !check) {
             		totalTime = (long)pa.getTotalDuration().toMillis();
@@ -35,12 +36,29 @@ public class AudioPlayer {
             		Total_Frame.panel3.voicePlayBar.setValue(0);
             		check = true;
             	}
+            	if(Total_Frame.panel3.pauseButton.isSelected()) {
+            		pa.pause();
+            		Total_Frame.panel3.pauseButton.setIcon(Total_Frame.panel3.clickedpause);
+            		Total_Frame.panel3.playButton.setIcon(Total_Frame.panel3.playImage);
+            	}
+            	if(Total_Frame.panel3.playButton.isSelected()) {
+            		pa.play();
+            		Total_Frame.panel3.pauseButton.setIcon(Total_Frame.panel3.pauseImage);
+            		Total_Frame.panel3.playButton.setIcon(Total_Frame.panel3.clickedplay);
+            	}
+            	if(Panel_3.dispose) {
+            		Panel_3.dispose = false;
+            		Total_Frame.panel3.pauseButton.setIcon(Total_Frame.panel3.pauseImage);
+            		Total_Frame.panel3.playButton.setIcon(Total_Frame.panel3.playImage);
+            		break;
+            	}
                 currentTime = (long)pa.getCurrentTime().toMillis();
                 Total_Frame.panel3.voicePlayBar.setValue((int)currentTime);
             }
             Panel_1.valueCount = false;
             pa.stop();
             Total_Frame.panel3.voicePlayBar.setValue(0);
+            Total_Frame.panel3.playButton.setIcon(Total_Frame.panel3.playImage);
             check = false;
         });
         th.start();

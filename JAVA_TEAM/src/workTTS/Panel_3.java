@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 public class Panel_3 extends JPanel {
 	
@@ -25,26 +28,37 @@ public class Panel_3 extends JPanel {
 	private final JTextField textField;       // 텍스트를 입력할 공간
 	private final JButton buttonText;         // 텍스트를 입력하고 텍스트 파일에 저장할 때 사용
 	public JLabel listCount; 
-	private final JButton stopButton;
-	private final JButton pauseButton;
-	private final JButton playButton;
+	public final JButton stopButton;
+	public final JToggleButton pauseButton;
+	public final JToggleButton playButton;
 	public final JProgressBar voicePlayBar;
 	private final JLabel mainImage;
+	private ButtonGroup bg = new ButtonGroup();
+	public final Icon clickedplay;
+	public final Icon playImage;
+	public final Icon clickedpause;
+	public final Icon pauseImage;
+	public static boolean dispose = false;
 	
 	public Panel_3() {
 		setLayout(null); //
 		
 		listCount = new JLabel("리스트 수");          // 리스트에 있는 텍스트의 수 표시
 		stopButton = new JButton();        // 음성 정지 버튼
-		pauseButton = new JButton();       // 음성 일시정지 버튼
-		playButton = new JButton();        // 음성 재생 버튼
+		pauseButton = new JToggleButton("", false);       // 음성 일시정지 버튼
+		playButton = new JToggleButton("", false);        // 음성 재생 버튼
 		voicePlayBar = new JProgressBar(); // 음성 진행바
 		mainImage = new JLabel();
 		
-		Icon playImage = makeIcon("playImage.png");    // 재생 아이콘 생성
-		Icon pauseImage = makeIcon("pauseImage.png");  // 일시정지 아이콘 생성
+		bg.add(playButton);
+		bg.add(pauseButton);
+		
+		playImage = makeIcon("playImage.png");    // 재생 아이콘 생성
+		pauseImage = makeIcon("pauseImage.png");  // 일시정지 아이콘 생성
 		Icon stopImage = makeIcon("stopImage.png");    // 정지 아이콘 생성
 		Icon main = makeIcon("mainImage.png");
+		clickedplay  = new ImageIcon(getClass().getResource("clickedplay.png"));
+		clickedpause  = new ImageIcon(getClass().getResource("clickedpause.png"));
 		
 		playButton.setIcon(playImage);             // 버튼에 set
 		pauseButton.setIcon(pauseImage);
@@ -78,6 +92,7 @@ public class Panel_3 extends JPanel {
 		Handler handler = new Handler();
 		textField.addActionListener(handler);
 		buttonText.addActionListener(handler);
+		stopButton.addActionListener(handler);
 	}
 	
 	private class Handler implements ActionListener
@@ -86,6 +101,10 @@ public class Panel_3 extends JPanel {
 		public void actionPerformed(ActionEvent event)
 		{
 			String string = "";		// text 저장 공간
+			
+			if(event.getSource() == stopButton) {
+				dispose = true;
+			}
 			
 			if(event.getSource() == textField || event.getSource() == buttonText) {
 				string = textField.getText();

@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 public class Panel_2 extends JPanel {
 	
@@ -15,7 +16,7 @@ public class Panel_2 extends JPanel {
 	private final JButton button2;
 	private final JButton button3;
 	private final JButton defaultList;
-	private final JButton button5;
+	private final JToggleButton button5;
 	private final Panel_1 panel1;
 	private final Panel_3 panel3;
 	
@@ -26,7 +27,7 @@ public class Panel_2 extends JPanel {
 		button2 = new JButton("리스트 전체 삭제");  // 버튼 클릭 시 재확인 창이 뜨면 좋겠음 
 		button3 = new JButton("리스트 삭제");      // 1개씩 위에서 부터 삭제 되도록 (mp3파일도 같이 삭제 되어야함)
 		defaultList = new JButton("리스트 초기화");
-		button5 = new JButton();
+		button5 = new JToggleButton("음성 반복 재생", false);
 		this.panel1 = panel1;                   // 패널1 선언
 		this.panel3 = panel3;
 		
