@@ -12,7 +12,7 @@ public class AudioPlayer {
 	public static long totalTime;
 	private static long currentTime;
 	
-	public static void playAudio(File audio, Panel_1 panel1) {
+	public static void playAudio(File audio) {
 		@SuppressWarnings("unused")
 		JFXPanel panel = new JFXPanel();
 		Path p = audio.toPath();
@@ -36,6 +36,5 @@ public class AudioPlayer {
         });
         th.start();
 
-		panel1.updateUI();
 	}
 }

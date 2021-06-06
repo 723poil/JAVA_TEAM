@@ -43,7 +43,8 @@ public class Panel_1 extends JPanel {
 							if(e.getSource() == textToSpeechList && !valueCount) {
 								if(textToSpeechList.getSelectedIndex() <= count) {
 									valueCount = true;
-									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"), Total_Frame.panel1);
+									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"));
+									textToSpeechList.updateUI();
 								}
 								valueCount = false;
 							}
