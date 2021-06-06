@@ -1,5 +1,6 @@
 package workTTS;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,14 +27,20 @@ public class Panel_1 extends JPanel {
 		public static boolean valueCount = false;
 		
 		public Panel_1() {
+			setLayout(null);
+			
 			textToSpeechList = new JList<String>(storedTTS);  // 저장된 텍스트를 List에 삽입
 			
 			textToSpeechList.setVisibleRowCount(20);          // 최대 행의 수 20로 설정
 			textToSpeechList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  // 리스트에서 하나씩만 선택
-			textToSpeechList.setBounds(0, 0, 300, 400);
 			textToSpeechList.setFixedCellHeight(19);
-			textToSpeechList.setFixedCellWidth(280);
-			add(new JScrollPane(textToSpeechList));           // List에 스크롤 부착
+			textToSpeechList.setFixedCellWidth(1000);
+			
+			JScrollPane scrollPane = new JScrollPane(textToSpeechList);
+			scrollPane.setBounds(0,0,300,400);
+			scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+			add(scrollPane);           // List에 스크롤 부착
 			
 			textToSpeechList.addListSelectionListener(
 					new ListSelectionListener() {
@@ -43,7 +50,8 @@ public class Panel_1 extends JPanel {
 							if(e.getSource() == textToSpeechList && !valueCount) {
 								if(textToSpeechList.getSelectedIndex() <= count) {
 									valueCount = true;
-									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"));
+									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+
+											"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"));
 									textToSpeechList.updateUI();
 								}
 							}
@@ -51,7 +59,8 @@ public class Panel_1 extends JPanel {
 						}});
 		}
 		
-	public static void UpdateTextList(Panel_1 panel, Panel_3 panel3) throws IOException, UnsupportedAudioFileException {
+	public static void UpdateTextList(Panel_1 panel, Panel_3 panel3) 
+			throws IOException, UnsupportedAudioFileException {
 		DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Total_Frame.directoryPath);
 		
 		for(int i=0; i<=count ; i++) {  // 리스트 업데이트 전 내용 초기화

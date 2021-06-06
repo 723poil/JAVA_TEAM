@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,7 +28,7 @@ public class Panel_3 extends JPanel {
 	private final JButton stopButton;
 	private final JButton pauseButton;
 	private final JButton playButton;
-	private final JProgressBar voicePlayBar;
+	public final JProgressBar voicePlayBar;
 	private final JLabel mainImage;
 	
 	public Panel_3() {
@@ -54,12 +53,12 @@ public class Panel_3 extends JPanel {
 		
 		voicePlayBar.setValue(0);
 		
-		listCount.setBounds(5, 390, 480, 30);
-		voicePlayBar.setBounds(5, 430, 300, 30);
-		stopButton.setBounds(45, 475, 50, 50);
-		playButton.setBounds(125, 475, 50, 50);
-		pauseButton.setBounds(205, 475, 50, 50);
-		mainImage.setBounds(325, 390, 140, 140);
+		listCount.setBounds(0, 0, 480, 30);
+		voicePlayBar.setBounds(0, 30, 300, 30);
+		stopButton.setBounds(40, 75, 50, 50);
+		playButton.setBounds(120, 75, 50, 50);
+		pauseButton.setBounds(200, 75, 50, 50);
+		mainImage.setBounds(320, 0, 140, 140);
 		
 		add(listCount);
 		add(voicePlayBar);
@@ -69,11 +68,11 @@ public class Panel_3 extends JPanel {
 		add(mainImage);
 		
 		textField = new JTextField(70);
-		textField.setBounds(8, 545, 400, 60);
+		textField.setBounds(3, 145, 400, 50);
 		add(textField);
 		
 		buttonText = new JButton("저장");
-		buttonText.setBounds(418, 545, 60, 60);
+		buttonText.setBounds(413, 145, 60, 50);
 		add(buttonText);
 		
 		Handler handler = new Handler();
@@ -96,15 +95,18 @@ public class Panel_3 extends JPanel {
 					builder.append(new String(string.getBytes(StandardCharsets.UTF_8), "UTF-8"));
 					Panel_1.storedTTS[++Panel_1.count] = builder.toString();	// storedTTS 객체에 저장
 					if(Panel_1.count < 10) {
-						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"0_"+Panel_1.count+".txt");
+						File file = new File(Total_Frame.directoryPath.toString()+
+								"\\"+"0_"+Panel_1.count+".txt");
 						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
 					}
 					else if(Panel_1.count < 20) {
-						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"1_"+(Panel_1.count-10)+".txt");
+						File file = new File(Total_Frame.directoryPath.toString()+
+								"\\"+"1_"+(Panel_1.count-10)+".txt");
 						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
 					}
 					else {
-						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"2_"+(Panel_1.count-20)+".txt");
+						File file = new File(Total_Frame.directoryPath.toString()+
+								"\\"+"2_"+(Panel_1.count-20)+".txt");
 						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
 					}
 					
@@ -112,8 +114,8 @@ public class Panel_3 extends JPanel {
 					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
 							+"\\TTS\\"+Panel_1.count+".mp3"));
 					
-					Panel_1.UpdateTextList(Total_Frame.panel1, Total_Frame.panel3);	// list 업데이트
-				} catch (IOException | UnsupportedAudioFileException e) {
+					Total_Frame.panel1.updateUI();
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				
@@ -131,7 +133,8 @@ public class Panel_3 extends JPanel {
 			try {
 				file.createNewFile();
 				
-				BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getPath()), "UTF-8"));
+				BufferedWriter output = new BufferedWriter(
+								new OutputStreamWriter(new FileOutputStream(file.getPath()), "UTF-8"));
 				
 				output.write(string.toString());
 				output.close();

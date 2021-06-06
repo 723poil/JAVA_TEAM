@@ -35,7 +35,8 @@ public class FileManager {
 			JOptionPane.showMessageDialog(null, "TTS폴더가 생성되었습니다.");
 	}
 
-	public static void checkFile(int index) throws IOException, UnsupportedAudioFileException {         // mp3파일이 이미 생성되어있는지 확인하는 메소드
+	public static void checkFile(int index) 
+			throws IOException, UnsupportedAudioFileException {         // mp3파일이 이미 생성되어있는지 확인하는 메소드
 		File file = new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3");
 		
 		if(!file.exists()) {

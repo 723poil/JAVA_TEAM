@@ -10,7 +10,8 @@ import javafx.scene.media.MediaPlayer;
 public class AudioPlayer {
 
 	public static long totalTime;
-	private static long currentTime;
+	public static long currentTime;
+	private static boolean check;
 	
 	public static void playAudio(File audio) {
 		@SuppressWarnings("unused")
@@ -27,13 +28,20 @@ public class AudioPlayer {
 		Thread th = new Thread(()-> {
 			
             while(currentTime < totalTime) { // 재생시간에 따라 스레드 종료
-            	if(currentTime > 100) totalTime = (long)pa.getTotalDuration().toMillis();
+            	if(currentTime > 100 && !check) {
+            		totalTime = (long)pa.getTotalDuration().toMillis();
+            		Total_Frame.panel3.voicePlayBar.setMaximum((int) totalTime);
+            		Total_Frame.panel3.voicePlayBar.setMinimum(0);
+            		Total_Frame.panel3.voicePlayBar.setValue(0);
+            		check = true;
+            	}
                 currentTime = (long)pa.getCurrentTime().toMillis();
-                System.out.println((long)pa.getTotalDuration().toMillis());
-                System.out.println(currentTime);
+                Total_Frame.panel3.voicePlayBar.setValue((int)currentTime);
             }
             Panel_1.valueCount = false;
             pa.stop();
+            Total_Frame.panel3.voicePlayBar.setValue(0);
+            check = false;
         });
         th.start();
 

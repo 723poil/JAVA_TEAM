@@ -20,12 +20,13 @@ public class SetFileTTS {
 		
 		SynthesizeSpeechResponse response = inputFileContent.synthesizeSpeech(
 				SynthesisInput.newBuilder().setText(textContent).build(), 
-				VoiceSelectionParams.newBuilder().setLanguageCode("ko-KR").setSsmlGender(SsmlVoiceGender.NEUTRAL).build(), 
+				VoiceSelectionParams.newBuilder().setLanguageCode("ko-KR")
+				.setSsmlGender(SsmlVoiceGender.NEUTRAL).build(), 
 				AudioConfig.newBuilder().setAudioEncoding(AudioEncoding.MP3).build());
 		
-		try(OutputStream out = new FileOutputStream(Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3")) {
+		try(OutputStream out = new FileOutputStream(
+				Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3")) {
 			out.write(response.getAudioContent().toByteArray());
-			
 		}
 		
 	}

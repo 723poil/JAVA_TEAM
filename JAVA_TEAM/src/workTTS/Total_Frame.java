@@ -1,6 +1,7 @@
 package workTTS;
 
 
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Total_Frame extends JFrame {
 	
@@ -27,13 +29,14 @@ public class Total_Frame extends JFrame {
 	public static void main(String[] args) {
 		
 		JFrame totalFrame = new JFrame("Working TTS"); // Frame »ý¼º
+		totalFrame.setLayout(null);
 			
-		totalFrame.setBounds(100, 100, 500, 650);
+		totalFrame.setBounds(0, 0, 500, 650);
 		
-		panel1.setBounds(5, 0, 300, 400);		
+		panel1.setBounds(5, 5, 300, 400);		
 		panel2.setBounds(305, 0, 195, 400);		
-		panel3.setBounds(5, 405, 490, 250);
-		
+		panel3.setBounds(5, 410, 475, 200);
+
 		totalFrame.add(panel1);
 		totalFrame.add(panel2);
 		totalFrame.add(panel3);
