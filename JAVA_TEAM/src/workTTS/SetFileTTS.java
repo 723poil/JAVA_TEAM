@@ -11,7 +11,6 @@ import com.google.cloud.texttospeech.v1.AudioConfig;
 import com.google.cloud.texttospeech.v1.SsmlVoiceGender;
 import com.google.cloud.texttospeech.v1.SynthesisInput;
 import com.google.cloud.texttospeech.v1.VoiceSelectionParams;
-import com.google.protobuf.ByteString;
 
 public class SetFileTTS {
 
@@ -19,18 +18,13 @@ public class SetFileTTS {
 		
 		TextToSpeechClient inputFileContent = TextToSpeechClient.create();
 		
-		SynthesisInput textInput = SynthesisInput.newBuilder().setText(textContent).build();
-		
-		VoiceSelectionParams textSpeech = VoiceSelectionParams.newBuilder().setLanguageCode("ko-KR").setSsmlGender(SsmlVoiceGender.NEUTRAL).build();
-		
-		AudioConfig audioConfig = AudioConfig.newBuilder().setAudioEncoding(AudioEncoding.MP3).build();
-		
-		SynthesizeSpeechResponse response = inputFileContent.synthesizeSpeech(textInput, textSpeech, audioConfig);
-		
-		ByteString audioContents = response.getAudioContent();
+		SynthesizeSpeechResponse response = inputFileContent.synthesizeSpeech(
+				SynthesisInput.newBuilder().setText(textContent).build(), 
+				VoiceSelectionParams.newBuilder().setLanguageCode("ko-KR").setSsmlGender(SsmlVoiceGender.NEUTRAL).build(), 
+				AudioConfig.newBuilder().setAudioEncoding(AudioEncoding.MP3).build());
 		
 		try(OutputStream out = new FileOutputStream(Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3")) {
-			out.write(audioContents.toByteArray());
+			out.write(response.getAudioContent().toByteArray());
 			
 		}
 		

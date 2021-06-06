@@ -5,17 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
-
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -102,9 +95,18 @@ public class Panel_3 extends JPanel {
 				try {
 					builder.append(new String(string.getBytes(StandardCharsets.UTF_8), "UTF-8"));
 					Panel_1.storedTTS[++Panel_1.count] = builder.toString();	// storedTTS 객체에 저장
-					File file = new File(Total_Frame.directoryPath.toString()
-							+"\\"+Panel_1.count+".txt");
-					setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					if(Panel_1.count < 10) {
+						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"0_"+Panel_1.count+".txt");
+						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					}
+					else if(Panel_1.count < 20) {
+						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"1_"+(Panel_1.count-10)+".txt");
+						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					}
+					else {
+						File file = new File(Total_Frame.directoryPath.toString()+"\\"+"2_"+(Panel_1.count-20)+".txt");
+						setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					}
 					
 					SetFileTTS.create(string, Panel_1.count);	// TTS 파일 생성
 					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
