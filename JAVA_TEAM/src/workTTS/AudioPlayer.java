@@ -32,6 +32,7 @@ public class AudioPlayer {
                 System.out.println((long)pa.getTotalDuration().toMillis());
                 System.out.println(currentTime);
             }
+            Panel_1.valueCount = false;
             pa.stop();
         });
         th.start();

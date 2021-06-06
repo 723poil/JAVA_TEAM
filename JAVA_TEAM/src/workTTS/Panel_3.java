@@ -3,9 +3,15 @@ package workTTS;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -91,12 +97,14 @@ public class Panel_3 extends JPanel {
 			
 			if(event.getSource() == textField || event.getSource() == buttonText) {
 				string = textField.getText();
-				Panel_1.storedTTS[++Panel_1.count] = string;	// storedTTS 객체에 저장
+				StringBuilder builder = new StringBuilder();
 				
 				try {
+					builder.append(new String(string.getBytes(StandardCharsets.UTF_8), "UTF-8"));
+					Panel_1.storedTTS[++Panel_1.count] = builder.toString();	// storedTTS 객체에 저장
 					File file = new File(Total_Frame.directoryPath.toString()
 							+"\\"+Panel_1.count+".txt");
-					setTextFile(file, string);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					setTextFile(file, builder);	// 텍스트 파일 생성 및 파일에 텍스트 추가
 					
 					SetFileTTS.create(string, Panel_1.count);	// TTS 파일 생성
 					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
@@ -117,11 +125,14 @@ public class Panel_3 extends JPanel {
 		return new ImageIcon(getClass().getResource(imageName));
 	}
 	
-	public void setTextFile(File file, String string) {              	// 텍스트파일에 입력한 텍스트 추가
+	public void setTextFile(File file, StringBuilder string) {              	// 텍스트파일에 입력한 텍스트 추가
 			try {
-				FileWriter fileWriter = new FileWriter(file, false); // 텍스트 파일에 다시 저장하기 위해 객체 생성
-				fileWriter.write(string);                    // 생성한 객체를 통해 텍스트 파일에 내용 갱신
-				fileWriter.close();                                      // 생성된 객체 종료
+				file.createNewFile();
+				
+				BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getPath()), "UTF-8"));
+				
+				output.write(string.toString());
+				output.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
