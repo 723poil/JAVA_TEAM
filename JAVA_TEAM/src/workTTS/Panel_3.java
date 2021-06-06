@@ -3,11 +3,14 @@ package workTTS;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -84,18 +87,28 @@ public class Panel_3 extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent event)
 		{
-			String string = "";
+			String string = "";		// text 저장 공간
 			
 			if(event.getSource() == textField || event.getSource() == buttonText) {
-				string = textField.getText();		// text 저장
-			
+				string = textField.getText();
+				Panel_1.storedTTS[++Panel_1.count] = string;	// storedTTS 객체에 저장
+				
 				try {
+					File file = new File(Total_Frame.directoryPath.toString()
+							+"\\"+Panel_1.count+".txt");
+					setTextFile(file, string);	// 텍스트 파일 생성 및 파일에 텍스트 추가
+					
 					SetFileTTS.create(string, Panel_1.count);	// TTS 파일 생성
-				} catch (IOException e) {
+					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
+							+"\\TTS\\"+Panel_1.count+".mp3"));
+					
+					Panel_1.UpdateTextList(Total_Frame.panel1, Total_Frame.panel3);	// list 업데이트
+				} catch (IOException | UnsupportedAudioFileException e) {
 					e.printStackTrace();
 				}
 				
-				textField.setText("");				// textField 초기화
+				
+				textField.setText("");		// textField 초기화
 			}
 		}
 	}
@@ -104,4 +117,13 @@ public class Panel_3 extends JPanel {
 		return new ImageIcon(getClass().getResource(imageName));
 	}
 	
+	public void setTextFile(File file, String string) {              	// 텍스트파일에 입력한 텍스트 추가
+			try {
+				FileWriter fileWriter = new FileWriter(file, false); // 텍스트 파일에 다시 저장하기 위해 객체 생성
+				fileWriter.write(string);                    // 생성한 객체를 통해 텍스트 파일에 내용 갱신
+				fileWriter.close();                                      // 생성된 객체 종료
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
 }
