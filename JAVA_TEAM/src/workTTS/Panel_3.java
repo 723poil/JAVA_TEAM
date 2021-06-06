@@ -3,6 +3,10 @@ package workTTS;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -80,11 +84,24 @@ public class Panel_3 extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent event)
 		{
+			String string = "";
 			
+			if(event.getSource() == textField || event.getSource() == buttonText) {
+				string = textField.getText();		// text 历厘
+			
+				try {
+					SetFileTTS.create(string, Panel_1.count);	// TTS 颇老 积己
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				textField.setText("");				// textField 檬扁拳
+			}
 		}
 	}
 	
 	public Icon makeIcon(String imageName) {  // 酒捞能 积己 method
 		return new ImageIcon(getClass().getResource(imageName));
 	}
+	
 }
