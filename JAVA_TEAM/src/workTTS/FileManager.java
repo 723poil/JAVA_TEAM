@@ -34,6 +34,26 @@ public class FileManager {
 			folder.mkdir();
 			JOptionPane.showMessageDialog(null, "TTS폴더가 생성되었습니다.");
 	}
+	
+	public static void deleteAllFile(String directoryPath) {		// 파일 제거 매소드
+		 	File folder = new File(directoryPath);
+		    try {
+		    	if(folder.exists()){
+	                File[] folder_list = folder.listFiles(); //파일리스트 얻어오기
+					
+	                for (int i = 0; i < folder_list.length; i++) {
+	                	if(folder_list[i].isFile()) {
+	                		folder_list[i].delete();	// 파일 삭제
+	                	}else {
+	                		deleteAllFile(folder_list[i].getPath()); // 재귀함수 호출
+	                		folder_list[i].delete();	// 폴더 삭제
+	                	}
+	                }
+		    	}
+		    } catch (Exception e) {
+		    	e.getStackTrace();
+		    }
+	}
 
 	public static void checkFile(int index) 
 			throws IOException, UnsupportedAudioFileException {         // mp3파일이 이미 생성되어있는지 확인하는 메소드
