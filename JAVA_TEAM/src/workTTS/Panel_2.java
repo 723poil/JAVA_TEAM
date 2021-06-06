@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -24,9 +25,9 @@ public class Panel_2 extends JPanel {
 		setLayout(null);
 		
 		resetPath = new JButton("경로 재설정");    // 경로 재설정 버튼
-		button2 = new JButton("리스트 전체 삭제");  // 버튼 클릭 시 재확인 창이 뜨면 좋겠음 
+		button2 = new JButton("리스트 초기화");  // 버튼 클릭 시 재확인 창이 뜨면 좋겠음 
 		button3 = new JButton("리스트 삭제");      // 1개씩 위에서 부터 삭제 되도록 (mp3파일도 같이 삭제 되어야함)
-		defaultList = new JButton("리스트 초기화");
+		defaultList = new JButton("");
 		button5 = new JToggleButton("음성 반복 재생", false);
 		this.panel1 = panel1;                   // 패널1 선언
 		this.panel3 = panel3;
@@ -65,7 +66,6 @@ public class Panel_2 extends JPanel {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (UnsupportedAudioFileException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -77,6 +77,14 @@ public class Panel_2 extends JPanel {
 				
 				panel1.updateUI();
 				// 텍스트파일과 mp3파일 지우는 함수 생성
+			}
+			else if(event.getSource() == button2 ) {
+				if(!Total_Frame.directoryPath.toString().equals("") && JOptionPane.showConfirmDialog(null, "정말로 초기화 하시겠습니까?") == 0) {
+					
+				}
+				else if(Total_Frame.directoryPath.toString().equals("")) {
+					JOptionPane.showMessageDialog(null, "경로를 지정하세요.");
+				}
 			}
 		}
 	}
