@@ -17,7 +17,7 @@ public class Panel_2 extends JPanel {
 	private final JButton button2;
 	private final JButton button3;
 	private final JButton defaultList;
-	private final JToggleButton button5;
+	public final JToggleButton button5;
 	private final Panel_1 panel1;
 	private final Panel_3 panel3;
 	
@@ -80,10 +80,21 @@ public class Panel_2 extends JPanel {
 			}
 			else if(event.getSource() == button2 ) {
 				if(!Total_Frame.directoryPath.toString().equals("") && JOptionPane.showConfirmDialog(null, "정말로 초기화 하시겠습니까?") == 0) {
-					
+					try {
+						FileManager.deleteAllFile(Total_Frame.directoryPath);
+					} catch (IOException | UnsupportedAudioFileException e) {
+						e.printStackTrace();
+					}
 				}
 				else if(Total_Frame.directoryPath.toString().equals("")) {
 					JOptionPane.showMessageDialog(null, "경로를 지정하세요.");
+				}
+			}
+			else if(event.getSource() == button3) {
+				try {
+					FileManager.deleteOneFile();
+				} catch (IOException | UnsupportedAudioFileException e) {
+					e.printStackTrace();
 				}
 			}
 		}

@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 
 public class Panel_3 extends JPanel {
 	
@@ -39,6 +40,8 @@ public class Panel_3 extends JPanel {
 	public final Icon clickedpause;
 	public final Icon pauseImage;
 	public static boolean dispose = false;
+	public JLabel curtime;
+	public JLabel totaltime;
 	
 	public Panel_3() {
 		setLayout(null); //
@@ -49,6 +52,10 @@ public class Panel_3 extends JPanel {
 		playButton = new JToggleButton("", false);        // 음성 재생 버튼
 		voicePlayBar = new JProgressBar(); // 음성 진행바
 		mainImage = new JLabel();
+		curtime = new JLabel("00:00");
+		totaltime = new JLabel("00:00");
+		
+		totaltime.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		bg.add(playButton);
 		bg.add(pauseButton);
@@ -67,11 +74,13 @@ public class Panel_3 extends JPanel {
 		
 		voicePlayBar.setValue(0);
 		
+		curtime.setBounds(0, 60,150,20);
+		totaltime.setBounds(150, 60, 150, 20);
 		listCount.setBounds(0, 0, 480, 30);
 		voicePlayBar.setBounds(0, 30, 300, 30);
-		stopButton.setBounds(40, 75, 50, 50);
-		playButton.setBounds(120, 75, 50, 50);
-		pauseButton.setBounds(200, 75, 50, 50);
+		stopButton.setBounds(40, 85, 50, 50);
+		playButton.setBounds(120, 85, 50, 50);
+		pauseButton.setBounds(200, 85, 50, 50);
 		mainImage.setBounds(320, 0, 140, 140);
 		
 		add(listCount);
@@ -80,13 +89,15 @@ public class Panel_3 extends JPanel {
 		add(playButton);
 		add(pauseButton);
 		add(mainImage);
+		add(curtime);
+		add(totaltime);
 		
 		textField = new JTextField(70);
-		textField.setBounds(3, 145, 400, 50);
+		textField.setBounds(3, 155, 400, 50);
 		add(textField);
 		
 		buttonText = new JButton("저장");
-		buttonText.setBounds(413, 145, 60, 50);
+		buttonText.setBounds(413, 155, 60, 50);
 		add(buttonText);
 		
 		Handler handler = new Handler();
@@ -157,6 +168,9 @@ public class Panel_3 extends JPanel {
 				
 				output.write(string.toString());
 				output.close();
+				int listcount = Panel_1.count+1;
+				Total_Frame.panel3.listCount.setText("리스트 수 "+listcount+" / 30"); // 리스트 수 나타내는 라벨 업데이트
+				Total_Frame.panel3.listCount.updateUI();	
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -54,7 +54,6 @@ public class Panel_1 extends JPanel {
 									textToSpeechList.updateUI();
 								}
 							}
-							
 						}});
 		}
 		

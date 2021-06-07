@@ -35,7 +35,7 @@ public class Total_Frame extends JFrame { //
 		
 		panel1.setBounds(5, 5, 300, 400);		
 		panel2.setBounds(305, 0, 195, 400);		
-		panel3.setBounds(5, 410, 475, 200);
+		panel3.setBounds(5, 400, 475, 220);
 
 		totalFrame.add(panel1);
 		totalFrame.add(panel2);
@@ -58,7 +58,6 @@ public class Total_Frame extends JFrame { //
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

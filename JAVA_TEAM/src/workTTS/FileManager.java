@@ -52,9 +52,10 @@ public class FileManager {
 	          }
 	   }
 	   
-	   public static void deleteAllFile(Path path) {   // text 및 mp3 파일 제거 메소드
+	   public static void deleteAllFile(Path path) throws IOException, UnsupportedAudioFileException {   // text 및 mp3 파일 제거 메소드
 	      deleteFiles(path.toString()+"\\TTS");      // mp3 파일 제거
 	      deleteFiles(path.toString());   // text 파일 제거
+	      Panel_1.UpdateTextList(Total_Frame.panel1, Total_Frame.panel3);
 	   }
 
 	public static void checkFile(int index) 
@@ -63,7 +64,18 @@ public class FileManager {
 		
 		if(!file.exists()) {
 			SetFileTTS.create(Panel_1.storedTTS[index], index);
-			
 		}
+	}
+	
+	public static void deleteOneFile() throws IOException, UnsupportedAudioFileException {
+		File textFile = new File(Total_Frame.directoryPath.toString()+"\\"+(Panel_1.count / 10)+"_"+(Panel_1.count % 10)+".txt");
+		File mp3File = new File(Total_Frame.directoryPath.toString()+"\\TTS\\"+Panel_1.count+".mp3");
+		
+		textFile.delete();
+		mp3File.delete();
+		
+		Panel_1.count--;
+		Panel_1.storedTTS[Panel_1.count+1] = "";
+		Panel_1.UpdateTextList(Total_Frame.panel1, Total_Frame.panel3);
 	}
 }
