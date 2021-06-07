@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 
 public class Total_Frame extends JFrame { //
@@ -40,6 +42,19 @@ public class Total_Frame extends JFrame { //
 		totalFrame.add(panel1);
 		totalFrame.add(panel2);
 		totalFrame.add(panel3);
+		
+		try{
+	        //Windows 스타일의 Look & Feel로 설정
+	        UIManager.setLookAndFeel (
+	            "com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+	 
+	        //설정에 반영한다.
+	        SwingUtilities.updateComponentTreeUI(totalFrame) ;
+	   
+	    //에러 처리 블록
+	    }catch(Exception e){
+	        System.out.println(e + "오류 발생");
+	    }
 		
 		totalFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // frame 창 실행
 		totalFrame.setVisible(true);
