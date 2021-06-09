@@ -27,7 +27,11 @@ public class SetFileTTS {
 		try(OutputStream out = new FileOutputStream(
 				Total_Frame.directoryPath.toString()+"\\TTS\\"+index+".mp3")) {
 			out.write(response.getAudioContent().toByteArray());
+			out.close();
+			inputFileContent.close();
 		}
+		
+		
 		
 	}
 }

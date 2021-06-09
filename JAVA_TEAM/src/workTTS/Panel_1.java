@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JList;
@@ -24,6 +26,7 @@ public class Panel_1 extends JPanel {
 		public static String[] storedTTS = new String[30];    // 최대 30개로 설정
 		public static int count = -1;                         // 저장된 텍스트의 수
 		public static boolean valueCount = false;
+		public static ExecutorService executorService;
 		
 		public Panel_1() {
 			setLayout(null);
@@ -41,6 +44,8 @@ public class Panel_1 extends JPanel {
 			scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 			add(scrollPane);           // List에 스크롤 부착
 			
+			executorService = Executors.newCachedThreadPool();
+			
 			textToSpeechList.addListSelectionListener(
 					new ListSelectionListener() {
 
@@ -49,8 +54,10 @@ public class Panel_1 extends JPanel {
 							if(e.getSource() == textToSpeechList && !valueCount) {
 								if(textToSpeechList.getSelectedIndex() <= count) {
 									valueCount = true;
-									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+
-											"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"));
+//									AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()+
+//											"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3"));
+									executorService.execute(new Audiothread(new File(Total_Frame.directoryPath.toString()+
+											"\\TTS\\"+textToSpeechList.getSelectedIndex()+".mp3")));
 									textToSpeechList.updateUI();
 								}
 							}

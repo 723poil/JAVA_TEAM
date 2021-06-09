@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
@@ -118,6 +119,10 @@ public class Panel_3 extends JPanel {
 			}
 			
 			if(event.getSource() == textField || event.getSource() == buttonText) {
+				if(Panel_1.count == 29) {
+					JOptionPane.showMessageDialog(null, "리스트가 가득 차 있습니다.");
+					return;
+				}
 				string = textField.getText();
 				StringBuilder builder = new StringBuilder();
 				
@@ -141,8 +146,11 @@ public class Panel_3 extends JPanel {
 					}
 					
 					SetFileTTS.create(string, Panel_1.count);	// TTS 파일 생성
-					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
-							+"\\TTS\\"+Panel_1.count+".mp3"));
+					Panel_1.valueCount = true;
+//					AudioPlayer.playAudio(new File(Total_Frame.directoryPath.toString()
+//							+"\\TTS\\"+Panel_1.count+".mp3"));
+					Panel_1.executorService.execute(new Audiothread(new File(Total_Frame.directoryPath.toString()
+							+"\\TTS\\"+Panel_1.count+".mp3")));
 					
 					Total_Frame.panel1.updateUI();
 				} catch (IOException e) {
