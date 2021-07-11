@@ -36,3 +36,12 @@
 
 ## 구현 이미지
 ![image](https://user-images.githubusercontent.com/75459370/125160802-e8734580-e1b9-11eb-88bf-dc85d1358df7.png)
+
+## 참조 api
+ + https://console.cloud.google.com/marketplace/product/google/texttospeech.googleapis.com?q=search&referrer-search&hl=ko&project=ethereal-anvil-314800
+ + https://openjfx.io/#ZgotmplZ
+
+## 데모영상
+ + https://youtu.be/02tpPLmHWC8
+
+
